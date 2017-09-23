@@ -1,0 +1,181 @@
+<html>
+ <head>
+  <title>Train Route Information</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+     </head>
+  {% include 'head.html' %}
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<!-- {% for dict_item in rows %}
+   {% for key, value in dict_item.items() %}
+      <h1>Key: {{key}}</h1>
+      <h2>Value: {{value}}</h2> 
+   {% endfor %}
+{% endfor %} -->
+<div   style="width:1000px;" class="container">
+
+{% for row in  rows%}
+  <div class="row">
+    <div class="col-sm-4">
+       <div class="table-responsive" >
+        <table  border="1px" class="table table-hover ">
+            <tr>
+            <th>
+            Train Name
+            </th>
+            <th>
+            Train Number
+            </th>
+            </tr>
+             {% if 'train' in row %}
+             {% for train_data in  [row.train]%}
+                <tr>
+                <td>
+                {{train_data["number"]}}
+                </td>
+                <td>
+                {{train_data["name"]}}
+                </td>
+                </tr>
+              {% endfor %}
+              {% endif %}
+
+              </table>
+          </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="table-responsive" >
+        <table  border="1px" class="table table-hover ">
+            <thead>
+            <th>Day
+            </th>
+            <th>Run On</th>
+          </thead>
+            <!--  {% if 'train' in row %}
+             {% for train_data in  [row.train]%} -->
+             {% set testing = 1 %}
+              {% for day_data in  row.train["days"]%}
+              <tbody>
+
+            <!--   {% for data in  day_data.values()%} -->
+                  {% if testing <=1 %}
+                  <tr><td>{{day_data.items()[1][1]}}</td><td>{{day_data.items()[0][1]}}</td></tr>
+                  {% endif %}
+                  {% set testing = testing + 1 %}
+
+              </tbody>
+
+            <!--  {% endfor %} -->
+              {% endfor %}
+         <!--  {% endfor %}
+          {% endif %} -->
+
+        </table>
+        </tr>
+        </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="table-responsive" >
+        <table  border="1px" class="table table-hover ">
+          
+          <thead><th>Class</th> <th>Availability</th></thead>
+
+            <!--  {% if 'train' in row %}
+             {% for train_data in  [row.train]%} -->
+              {% set count = 1 %}
+              {% for day_data in  row.train.classes%}
+              <!-- {% for data in  day_data.values()%} -->
+              {% if count <=1 %}
+                <tr>
+                    <td>{{day_data["code"]}}</td>
+                    <td>{{day_data["available"]}}</td>
+                    </tr>
+              {% endif %}
+              {% set count = count + 1 %}
+             <!-- {% endfor %} -->
+              {% endfor %}
+           <!--    {% endfor %}
+           {% endif %} -->
+            </table>
+         
+           
+        </table>
+        </div>
+    </div>
+
+  </div>
+  
+     
+
+  <div class="table-responsive" >
+        <table  border="1px" class="table table-hover ">
+    <thead>
+       <th>Station</th>
+      <th>Schedule Depart</th>
+            <th>Schedule Arrival</th>
+      <th>Halt</th>
+      
+     
+      <th>State</th>
+     
+     <th>Platform No</th>
+           <th>Distance(Km.)</th>
+
+      <th>Day</th>
+      <th>Long</th>
+      <th>Lat</th>
+      <th>Map Link</th>
+    </thead>
+    
+    <tbody>
+      {% for route_info in  row.route%}
+      <tr class="active">
+        <td>
+        {{route_info["code"]}}-{{route_info["fullname"]}}
+        </td>
+      <td>{{route_info["schdep"]}}</td>
+            <td>{{route_info["scharr"]}}</td>
+
+      <td>{{route_info["halt"]}}</td>
+            <td>{{route_info["state"]}}</td>
+
+     
+      <td>{{route_info["no"]}}</td>
+      <td>{{route_info["distance"]}}</td>
+      <td>{{route_info["day"]}}</td>
+
+      <td>{{route_info["lng"]}}</td>
+      <td>{{route_info["lat"]}}</td>
+      <td><a href="https://www.google.co.in/maps" target="_blank">Link</a></td>
+      
+      
+      
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table></div>
+
+{% endfor %}
+  </div>
+
+
+
+<a href="/">Go back to home page</a>
+ 
+</body>
+{% include 'footer.html' %}
+
+</html>

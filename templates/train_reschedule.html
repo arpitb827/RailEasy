@@ -1,0 +1,90 @@
+<html>
+ <head>
+  <title>All Reschedule Trains</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+     </head>
+  {% include 'head.html' %}
+  <script>
+  $(document).ready(function() {
+    $(".datepicker_my").datepicker({ dateFormat: 'dd-mm-yy'});
+  });
+  </script>
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+<div style="width:300px;" class="col-sm-4">
+    {% for message in form.doj.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+   
+    <form action="/train_reschedule" method=post>
+      <fieldset>
+       <legend>All Reschedule Trains</legend>
+        {{ form.hidden_tag() }}
+       <div class="form-group col-sm-4" >
+        {{ form.doj.label }}<br>
+        {{ form.doj(class='datepicker_my') }}
+        <br>
+    
+        {{ form.submit }}
+      </div>
+    </fieldset>
+    </form>
+</div>
+<div class="col-sm-8">
+  <center><h3><u>Directions To Find</u></h3></center>
+  <p>
+    <ul  style="font-size: 18px;">
+         <li>Select Appropiate date on which trains are rescheduled.</li>
+
+
+      <li>After filling data just hit the Find button and than please be patience now fun start Rail Easy will take you to track the details of selected date.</li>
+      <li>
+        you will move to new web page where you find all information for all rescheduled trains.
+
+      </li>
+      <li>
+        Here i presented all the information in a tabular format which is easy for every user to retrive and note.
+      </li>
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+     <p>
+      <center><h3><u>Causes For Failure</u></h3></center>
+      
+    <ul  style="font-size: 18px;">
+      <li>The data which you are entering  are not proper with date.
+</li>
+      <li>Server having Techincal Issue , Don't be panic please try after some time.</li>
+      
+     
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+    <strong>Note:</strong>Kindly write us or Contact if you have any issue while getting the information on Rail Easy.
+  </p>
+</div>
+
+ </div>
+</body>
+{% include 'footer.html' %}
+
+</html>

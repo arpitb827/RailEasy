@@ -1,0 +1,134 @@
+<html>
+ <head>
+  <title>Train Between Station</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+    </head>
+  {% include 'head.html' %}
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<!-- {% for dict_item in rows %}
+   {% for key, value in dict_item.items() %}
+      <h1>Key: {{key}}</h1>
+      <h2>Value: {{value}}</h2> 
+   {% endfor %}
+{% endfor %} -->
+
+
+{% for row in  rows%}
+<div style="width:1000px;" class="container">
+<div class="row">
+  <div class="col-sm-4 col-md-offset-4">
+    <h3>
+  Total:{{row["total"]}}</h3>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+     <div class="table-responsive" >
+      <table  border="1px" align="center" class="table table-hover ">
+        
+      <thead>
+        <tr>
+        <th>Train Number</th>
+        <th>Train Name</th>
+        <th>Source</th>
+        <th>Destination</th>
+        <th>Schedule At</th>
+        <th>Arrival At</th>
+        
+         <th>Travel Time</th>
+        <!-- <th>Platform</th>
+        -->
+        
+        <th >Days</th>
+        
+       
+        
+        <th >Class</th>
+      </tr>
+
+      </thead>
+      <tbody>
+        {% for train_data in  row.train%}
+
+        <tr class="active">
+        <td>{{train_data["number"]}}</td>
+          <td>{{train_data["name"]}}</td>
+           <td>{{train_data["from"]["code"]}}-{{train_data["from"]["name"]}}</td>
+           <td>{{train_data["to"]["code"]}}-{{train_data["to"]["name"]}}</td>
+           <td>{{train_data["src_departure_time"]}}</td>
+            <td>{{train_data["dest_arrival_time"]}}</td>
+         
+          <td>{{train_data["travel_time"]}}</td>
+<!--           <td>{{train_data["no"]}}</td>
+ -->         
+          <td >
+          {% if 'days' in train_data %}
+            <table border="1px">
+              <thead>
+                <th>
+                  Day
+                </th>
+                <th>
+                  Run On
+                </th>
+              </thead>
+             {% for day_data in  train_data["days"]%}
+                
+                  <tr><td>{{day_data["code"]}}</td><td>{{day_data["runs"]}}</td></tr>
+             
+              {% endfor %}
+            </table>
+          {% endif %}
+         </td>
+          <td>
+            {% if 'classes' in train_data %}
+            <table border="1px">
+              <thead><th>Class</th> <th>Code</th><th>Avail</th></thead>
+             {% for res_data in  train_data["classes"]%}
+                
+                  <tr>
+                    <td>{{res_data["name"]}}</td>
+                    <td>{{res_data["code"]}}</td>
+                    <td>
+                      
+                      
+                            {{res_data["available"]}}
+                     
+                    </td></tr>
+             
+              {% endfor %}
+            </table>
+          {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+
+
+{% endfor %}
+</div>
+
+<a href="/">Go back to home page</a>
+ 
+</body>
+{% include 'footer.html' %}
+
+</html>

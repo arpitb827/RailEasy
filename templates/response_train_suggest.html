@@ -1,0 +1,73 @@
+<html>
+ <head>
+  <title>Train Information</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+     </head>
+  {% include 'head.html' %}
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<!-- {% for dict_item in rows %}
+   {% for key, value in dict_item.items() %}
+      <h1>Key: {{key}}</h1>
+      <h2>Value: {{value}}</h2> 
+   {% endfor %}
+{% endfor %} -->
+{% for row in  rows%}
+
+<div style="width:1000px;" class="container">
+  <table border=1px align="center">
+  <thead>
+    <th>Total</th>
+    
+   
+  </thead>
+    <tbody>
+    <tr>
+    <td>
+   
+    {{row["total"]}}
+  </td>
+    </tr>
+  </tbody>
+  </table>
+  <br/>
+  <br/>
+  <div class="table-responsive">
+    <table  class="table table-hover" align="center" >
+      <thead>
+      <th>Train </th>
+      </thead>
+      <tbody>
+        {% for train_data in  row.trains%}
+
+        <tr>
+          <td>{{train_data["number"]}}-{{train_data["name"]}}</td>
+          
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endfor %}
+
+
+<a href="/">Go back to home page</a>
+
+</body>
+{% include 'footer.html' %}
+
+</html>

@@ -1,0 +1,99 @@
+<html>
+ <head>
+  <title>Seat Availability</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+     </head>
+  {% include 'head.html' %}
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+{% for row in  rows%}
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <center><h3>Availability Status</h3></center>
+    
+  <div class="table-responsive">
+    <table border=0px align="center" class="table table-hover">
+    <thead>
+      <tr>
+      <th>Class</th>
+      <th>Quota</th>
+      
+    </tr>
+      
+     
+    </thead>
+      <tbody>
+      <tr class="active">
+      
+     
+      <td>
+            {{row["class"]["code"]}}-{{row["class"]["name"]}}
+
+      </td>
+      <td>
+            {{row["quota"]["code"]}}-{{row["quota"]["name"]}}
+
+      </td>
+      </tr>
+    </tbody>
+    </table>
+</div>
+  
+</div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="table-responsive">
+    <table border=0px align="center" class="table table-hover">
+      <thead>
+        <tr>
+        <th>
+          Running Date
+        </th>
+        <th>
+          Status
+        </th>
+        
+      </tr>
+
+      </thead>
+      {% for each in  row.availability%}
+
+      <tbody>
+        <tr class="active">
+          <td>
+            {{each["date"]}}
+          </td>
+          <td>
+            {{each["status"]}}
+          </td>
+         
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+</div>
+{% endfor %}
+
+
+<a href="/">Go back to home page</a>
+ 
+</body>
+{% include 'footer.html' %}
+
+</html>

@@ -1,0 +1,66 @@
+<html>
+<head>
+<script src="//cdn.ckeditor.com/4.7.2/basic/ckeditor.js"></script>
+<title>
+Easy Blog
+</title>
+<link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+</head>
+{% include 'head.html' %}
+<body>
+    {% include 'social.html' %}
+
+<br/>
+
+<br/>
+<br/>
+<div class="jumbotron text-center">
+  <h2>Add Post</h2>
+</div>
+<div class="container">
+
+  
+  <form  action="/add" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
+    </div>
+
+    <div class ="form-group">
+       <label for="inputfile">Upload Image:</label>
+        <input type="file" name="inputfile" accept="image/*" multiple> 
+   </div>
+    
+    <div class="form-group">
+
+    <label for="content">Description:</label>
+  <textarea class="form-control" rows="5" name="content" id="content" placeholder="Add some text here .." required ></textarea>
+  <script>
+            CKEDITOR.replace( 'content' );
+        </script>
+  </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<!-- <div  >
+	<div >
+	<h1>Add Entry</h1>
+	</div>
+	<div >
+	<form action="/add" method="post">
+	<label for="title">Title</label>
+	<input type="text" name="title" id="title"/>
+	<label for="content">Content</label>
+	<input type="content" name="content" id="content"/>
+	<button type="submit">Submit </button>
+	</form>
+	</div>
+</div> -->
+ 
+</body>
+{% include 'footer.html' %}
+
+</html>

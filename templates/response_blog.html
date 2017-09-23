@@ -1,0 +1,144 @@
+<html>
+	<head>
+		<title>
+		Easy Blog
+		</title>
+    <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+
+      <script type = "text/javascript">
+        function showForm() {
+        document.getElementById("theform").style.display = "block";
+        }
+        $('.make_default').click(function(e)
+        {
+            // Special stuff to do when this link is clicked...
+
+            // Cancel the default action
+            e.preventDefault();
+        });
+        </script>
+	</head>
+	{% include 'head.html' %}
+	<body>
+        {% include 'social.html' %}
+
+	<br/>
+  <br/>
+  <br/>
+  <br/>
+<br/>
+
+<div class="container">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="col-sm-12">
+      
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Search</a>
+      </div>
+      
+      <div class="navbar-collapse collapse" id="navbar-collapsible">
+        
+        <!-- <ul class="nav navbar-nav navbar-left">
+          <li><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+        </ul> -->
+        
+        <div class="navbar-form navbar-right btn-group">
+          <a href="/add" class="btn btn-default">New Post</a>
+         <!--  <button type="button" class="btn btn-default">Button 2</button>
+          <button type="button" class="btn btn-default">Button 3</button> -->
+        </div>
+        
+        <form class="navbar-form" method="GET" action="search">
+          <div class="form-group" style="display:inline;">
+            <div class="input-group">
+              <input type="text" name="query" id="query" placeholder="Enter some text to search" class="form-control">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+  </span>
+  			<span> <button type="submit" class="btn btn-primary" >Search</button>
+  </span>
+            </div>
+
+          </div>
+        </form>
+        
+      </div>
+      
+    </div>
+  </nav>
+</div>
+
+
+<!-- <div class="jumbotron text-center">
+  <h2>Your Rail Easy Blog</h2>
+  <p><i>Find and post all whatever you want !</i></p> 
+</div> -->
+
+<div class="container">
+
+ 
+    <div class="col-sm-8 well-sm jumbotron" style="margin-left:10px;margin-right:10px;">
+  	{% for post in posts %}
+       <div class="row">
+    <!-- div class="media">
+      <div class="media-left media-top">
+        <img src="/static/img/avtar1.png" class="media-object" style="width:60px">
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">{{post.title}}</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+       
+      </div>
+  </div>
+  <hr> -->
+
+   
+     
+      <h3>{{post[0]}}</h3>
+      <h6><small>{{post[1]}}</small></h6>
+      <br/>
+       <img class="img-responsive" height="500" width="700" src="data:;base64,{{ post[3]}}"/>
+      <p>{{post[2]|safe}}</p>
+      
+       </div >
+    {% endfor %}
+      <br/>
+      <hr/>
+      <a href='#'  onclick = "showForm()"><small>Post your views here</small></a>
+        <div id = "theform" style="display:none">
+          <form acion="post_comment" method="GET" >
+              <textarea placeholder="Post comment here!" name="comment" class="form-control" rows="6"></textarea>
+
+              <button type="submit" class="btn btn-success green make_default"><i class="fa fa-share"></i> Post</button>
+          </form>
+          </div>
+      <h3> All comments</h3>
+
+        <div class="well well-sm">
+          <p>It is previous comment</p>
+          <p>It is previous comment</p>
+          <p>It is previous comment</p>
+          <p>It is previous comment</p>
+          <p>It is previous comment</p>
+        </div>
+   </div>
+
+
+  </div>
+
+  <br/>
+	
+
+</div>
+	</body>
+  {% include 'footer.html' %}
+
+</html>

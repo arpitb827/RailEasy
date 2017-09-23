@@ -1,0 +1,159 @@
+<html>
+ <head>
+  <title>Train Details</title>
+     </head>
+
+  {% include 'head.html' %}
+  
+
+ <script type="text/javascript">
+ $(document).ready(function(){
+        
+    var  source_data = [];
+      // var dataSrc = ["australia", "austria", "antartica", "argentina", "algeria"];
+    $.ajax({
+            url: '/suggest_train',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                // console.log(typeof response);
+                var jsonObject =JSON.parse(response);
+                // console.log("jsonObject"+jsonObject.train);
+                result=jsonObject.trains;
+                // console.log(typeof result);
+                console.log(result);
+                // console.log("beforeeeeeeeeeeeeeeeeeee",source_data);
+                $.each(result, function( index, data ) {
+                  var x = data.name +"-"+ data.number;
+                  source_data.push(x);
+                }); 
+                /
+              
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+              $(".calling_list").autocomplete({
+                 source:source_data
+                });
+
+      
+  });
+
+    // var typingTimer;                //timer identifier
+    // var doneTypingInterval = 1000;  //time in ms (5 seconds)
+
+    // //on keyup, start the countdown
+    // $('.calling_list').keyup(function(){
+    //     clearTimeout(typingTimer);
+    //     if ($('.calling_list').val()) {
+    //         typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    //     }
+    // });
+    //user is "finished typing," do something
+    // function doneTyping () {
+    //do something
+
+
+     // $('.calling_list').keyup(function () {
+ //      var train = $('.calling_list').val();
+ //      var source_data=[];
+      
+      
+        
+ //      //   console.log(source_data);
+ //      //   console.log(typeof source_data);
+ //      $(".calling_list").autocomplete({
+ //                source:source_data
+ //      });
+
+      
+ //      }//ending function done typing
+ // });
+  
+  //  $(function () {
+  //     var train = $('.calling_list').val();
+      
+  //       $.ajax({
+  //           url: '/suggest_train',
+  //           data: $('form').serialize(),
+  //           type: 'POST',
+  //           success: function(response) {
+  //               console.log(response);
+  //           },
+  //           error: function(error) {
+  //               console.log(error);
+  //           }
+  //       });
+  //     // var dataSrc = ["australia", "austria", "antartica", "argentina", "algeria"];
+   
+  //     // $(".calling_list").autocomplete({
+  //     //     source:dataSrc
+  //     // });
+  // });
+//   $(function () {
+//     var getData = function (request, response) {
+//         $.getJSON(
+//             "http://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
+//             //"http://api.railwayapi.com/suggest_train/trains/"+request.term+"/apikey/mia22f6h/",
+//             //"http://api.railwayapi.com/suggest_train/trains/AUG/apikey/mia22f6h/",
+//             function (data) {
+//                 //alert(data,typeof(data));
+//                 response(data);
+//             });
+//     };
+//     var selectItem = function (event, ui) {
+//         $(".calling_list").val(ui.item.value);
+//         return false;
+//     }
+ 
+//     $(".calling_list").autocomplete({
+//         source: getData,
+//         select: selectItem,
+//         minLength: 4,
+//         change: function() {
+//             $(".calling_list").val("").css("display", 2);
+//         }
+//     });
+// });
+ </script>
+
+  <body>
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div style="width:800px; margin:0 auto;">
+    {% for message in form.name.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+   
+    <form action="/train_details" method=post autocomplete="off">
+      <fieldset>
+       <legend>Train Information</legend>
+        {{ form.hidden_tag() }}
+       <div style=font-size:20px;font-weight:bold;margin-left:150px;>
+        {{ form.name.label }}<br>
+        {{ form.name(class_="calling_list")}}
+        <br>
+    
+        {{ form.submit }}
+      </div>
+    </fieldset>
+    </form>
+</div>
+ <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}" ></script>
+       <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui.js') }}" ></script>
+
+     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}" ></script>
+     <script type="text/javascript" src="{{ url_for('static', filename='js/bootshape.js') }}" ></script>
+<a href="/">Go back to home page</a>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<html>
+ <head>
+  <title>PNR Status</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+  </head>
+  {% include 'head.html' %}
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+{% for row in  rows%}
+<div class="row">
+  <div class="col-md-2 col-md-offset-5" >
+    <h3>PNR Status</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6" > 
+    <table border="1px" class="table table-hover "> 
+      <tr>
+      <th>
+    PNR No </th><td>{{row.pnr}}</td>
+  </tr>
+  <tr>
+    <th>
+    Running On </th><td> {{row.doj}}</td>
+  </tr>
+  <tr>
+    <th>
+    Train </th> <td>{{row.train["number"]}}- {{row.train["name"]}}</td>
+  </tr>
+  <tr>
+    <th>
+    From </th> <td>{{row.from_station["code"]}}-{{row.from_station["name"]}}</td>
+  </tr>
+  <tr>
+    <th>
+    To </th> <td> {{row.to_station["code"]}}-{{row.to_station["name"]}}</td>
+  </tr>
+  <tr>
+    <th>
+    Reservation Upto</th> <td> {{row.reservation_upto["code"]}}-{{row.reservation_upto["name"]}}</td>
+  </tr>
+  <tr>
+    <th>
+    Total Passengers</th> <td>{{row.total_passengers}}</td>
+  </tr>
+  <tr>
+    <th>
+    Class </th> <td>{{row.journey_class["code"]}}</td>
+  </tr>
+  </table>
+  </div>
+  <div class="col-sm-6">
+    <table border="1px" class="table table-hover ">
+      <tr>
+        <th>
+          Booking Status
+        </th>
+        <th>
+          Current Status
+        </th>
+        <th>
+          Platform No
+        </th>
+        <th>
+          Coach Position
+        </th>
+      </tr>
+      {% for each in row.passengers %}
+      <tr>
+        <td>
+          {{each.booking_status}}
+        </td>
+
+         <td>
+          {{each.current_status}}
+        </td>
+         <td>
+          {{each.no}}
+        </td>
+         <td>
+          {{each.coach_position}}
+        </td>
+
+      </tr>
+      {% endfor %}
+
+
+    </table>
+  </div>
+</div>
+<!-- <div style="width:1000px;" class="container">
+  
+ 
+  <div class="table-responsive" >
+    <table  class="table table-bordered" align="center" >
+      <thead>
+        <th>Train Number</th>
+        <th>Train Name</th>
+      <th>Source </th>
+      <th>Destination</th>
+      <th>Reschedule Date</th>
+      <th>Reschedule Time</th>
+      <th>Time Delay</th>
+      </thead>
+      <tbody>
+        {% for train_data in  row.trains%}
+
+        <tr>
+                    <td>{{train_data["number"]}}</td>
+          <td>{{train_data["name"]}}</td>
+
+          <td>{{train_data["from"]["code"]}}-{{train_data["from"]["name"]}}</td>
+                  <td>{{train_data["to"]["code"]}}-{{train_data["to"]["name"]}}</td>
+          <td>{{train_data["rescheduled_date"]}}</td>
+
+          <td>{{train_data["rescheduled_time"]}}</td>
+          <td>{{train_data["time_diff"]}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div> -->
+
+{% endfor %}
+
+
+
+<a href="/">Go back to home page</a>
+ 
+</body>
+{% include 'footer.html' %}
+
+</html>

@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>
+PNR Enquiry
+</title>
+<link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+ </head>
+  {% include 'head.html' %}
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+  <div class="col-sm-4">
+      {% for message in form.name.errors %}
+      <div>{{ message }}</div>
+      {% endfor %}
+      
+      <form action="/train_pnr" method=post>
+        <fieldset>
+         <legend>PNR Status</legend>
+          {{ form.hidden_tag() }}
+         <div class="form-group col-sm-4">
+          {{ form.name.label }}<br/>
+          {{ form.name }}
+          <br/>
+         
+          {{ form.submit }}
+        </div>
+      </fieldset>
+      </form>
+  </div>
+  <div class="col-sm-8">
+    <center><h3><u>Directions To Find</u></h3></center>
+  <p>
+    <ul  style="font-size: 18px;">
+      <li>Please Enter a valid PNR.
+      </li>
+      <li>
+        After entering the PNR click the find button . It will take you to the PNR information which will tell you all the data in sutiable tabular format. It is more readable.
+      </li>
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+     <p>
+      <center><h3><u>Causes For Failure</u></h3></center>
+      
+    <ul  style="font-size: 18px;">
+      <li>The data which you are entering  are not proper related with train number,station code information.
+      </li>
+      <li>Server having Techincal Issue , Don't be panic please try after some time.</li>
+      
+     
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+    <strong>Note:</strong>Kindly write us or Contact if you have any issue while getting the information on Rail Easy.
+  </p>
+  </div>
+</div>
+
+</body>
+{% include 'footer.html' %}
+
+</html>

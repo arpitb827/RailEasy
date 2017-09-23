@@ -1,0 +1,158 @@
+<html>
+ <head>
+  <title>Train Details</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+     </head>
+
+  {% include 'head.html' %}
+  
+
+ <!-- <script type="text/javascript">
+ $(document).ready(function(){
+      // var dataSrc = ["australia", "austria", "antartica", "argentina", "algeria"];
+
+
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 1000;  //time in ms (5 seconds)
+
+    //on keyup, start the countdown
+    $('.calling_list').keyup(function(){
+        clearTimeout(typingTimer);
+        if ($('.calling_list').val()) {
+            typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        }
+    });
+    //user is "finished typing," do something
+    function doneTyping () {
+    //do something
+
+
+     // $('.calling_list').keyup(function () {
+      var train = $('.calling_list').val();
+      var source_data=[];
+      
+        $.ajax({
+            url: '/suggest_train',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                // console.log(typeof response);
+               
+                var jsonObject =JSON.parse(response);
+                // console.log("jsonObject"+jsonObject.train);
+                result=jsonObject.trains;
+                console.log(typeof result);
+                console.log("rrrrrrrrrrrrrrrrrrrrr",result);
+                // source_data.push(result.name + result.number);
+                $(result).each(function(index,data){
+                  console.log("dddddddddddd",data);
+                  source_data.push(data.name +"-"+ data.number);
+                })
+                console.log($(result));
+                
+                console.log("source end"+source_data);
+                $(".calling_list").autocomplete({
+                  source:source_data
+                });
+              
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        console.log(source_data);
+        console.log(typeof source_data);
+      // $(".calling_list").autocomplete({
+      //           source:source_data
+      //       });
+
+      
+      }//ending function done typing
+ });
+  
+ </script> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+<div style="width:300px;" class="col-sm-4">
+    {% for message in form.name.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+   
+    <form action="/train_details" method=post autocomplete="off">
+      <fieldset>
+       <legend>Train Information</legend>
+        {{ form.hidden_tag() }}
+       <div class="form-group col-sm-4">
+        {{ form.name.label }}<br/>
+        {{ form.name(class_="calling_list")}}
+        <br/>
+    
+        {{ form.submit }}
+      </div>
+    </fieldset>
+    </form>
+</div>
+<div class="col-sm-8">
+  <center><h3><u>Directions To Find</u></h3></center>
+  <p>
+    <ul  style="font-size: 18px;">
+      <li>Enter train number of 5 digit it should be numerals eg 12953,12950.
+</li>
+      <li>After filling data just hit the Find button and than please be patience now fun start Rail Easy will take you to track the details of selected train.</li>
+      <li>
+        you will move to new web page where you find all information like train information and running days as well .
+
+      </li>
+      <li>
+        Here i presented all the information in a tabular format which is easy for every user to retrive and note.
+      </li>
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+     <p>
+      <center><h3><u>Causes For Failure</u></h3></center>
+      
+    <ul  style="font-size: 18px;">
+      <li>The data which you are entering  are not proper related with train number.
+</li>
+      <li>Server having Techincal Issue , Don't be panic please try after some time.</li>
+      
+     
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+    <strong>Note:</strong>Kindly write us or Contact if you have any issue while getting the information on Rail Easy.
+  </p>
+</div>
+<!--  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}" ></script>
+       <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui.js') }}" ></script>
+
+     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}" ></script>
+     <script type="text/javascript" src="{{ url_for('static', filename='js/bootshape.js') }}" ></script> -->
+<!-- <a href="/">Go back to home page</a>
+ --> </div>
+</body>
+{% include 'footer.html' %}
+
+</html>

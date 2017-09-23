@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head><title>Contact Us</title>
+<link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" ></head>
+{% include 'head.html' %}
+
+<body>
+    {% include 'social.html' %}
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<!-- <h2 style="text-align: center;">Contact Form</h2> -->
+{% for message in form.name.errors %}
+<div>{{ message }}</div>
+{% endfor %}
+{% for message in form.email.errors %}
+<div>{{ message }}</div>
+{% endfor %}
+{% for message in form.phone_number.errors %}
+<div>{{ message }}</div>
+{% endfor %}
+<div  class="container">
+    <div class="col-sm-6 pull-left">
+        <form action="/contact_form" method=post>
+          <fieldset>
+           <legend>Write to us</legend>
+            {{ form.hidden_tag() }}
+           <div class="col-sm-8">
+             <div class="form-group">
+            {{ form.name.label }}<br>
+            {{ form.name(class="form-control") }}
+            </div>
+             <br>
+             <div class="form-group">
+            {{ form.phone_number.label }}<br>
+            {{ form.phone_number(class="form-control") }}
+            </div>
+            <br>
+             <div class="form-group">
+            {{ form.email.label }}<br>
+            {{ form.email(class="form-control") }}
+            </div>
+           
+           
+            <br>
+             <div class="form-group">
+            {{ form.message.label }}<br>
+            {{ form.message(class="form-control", rows="6") }}
+            </div>
+            <br>
+          
+            <br>
+            {{ form.submit(class="btn btn-primary") }}
+          </div>
+        </fieldset>
+        </form>
+    </div>
+    <div class="col-sm-6 pull-right">
+          <img src="/static/img/contact2.jpg" alt="" height="600" class="img-responsive">
+    </div>
+</div>
+ </body>
+{% include 'footer.html' %}
+</html>

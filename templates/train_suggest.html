@@ -1,0 +1,94 @@
+<html>
+ <head>
+  <title>Get Trains</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+     </head>
+  {% include 'head.html' %}
+ <!-- <script type="text/javascript">
+   $(function () {
+      var dataSrc = ["australia", "austria", "antartica", "argentina", "algeria"];
+   
+      $(".calling_list").autocomplete({
+          source:dataSrc
+      });
+  });
+ </script> -->
+
+  <body>
+        {% include 'social.html' %}
+
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+  <div  class="col-sm-4">
+      {% for message in form.name.errors %}
+      <div>{{ message }}</div>
+      {% endfor %}
+     
+      <form action="/suggest_train" method=post>
+        <fieldset>
+         <legend>Get Train </legend>
+          {{ form.hidden_tag() }}
+         <div class="form-group col-sm-4">
+          {{ form.name.label }}<br/>
+          {{ form.name}}
+          <br/>
+      
+          {{ form.submit }}
+        </div>
+      </fieldset>
+      </form>
+  </div>
+  <div class="col-sm-8">
+     <center><h3><u>Directions To Find</u></h3></center>
+  <p>
+    <ul  style="font-size: 18px;">
+      <li>Here you can find the train by using number like eg .12953 etc.
+      </li>
+      <li>
+        Here you can find the train by using name like eg .aug,gomti etc.
+      </li>
+      <li>
+        After entering the train name and number click the find button and then it will take you to the train details.
+      </li>
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+     <p>
+      <center><h3><u>Causes For Failure</u></h3></center>
+      
+    <ul  style="font-size: 18px;">
+      <li>The data which you are entering  are not proper related with train number,station code information.
+      </li>
+      <li>Server having Techincal Issue , Don't be panic please try after some time.</li>
+      
+     
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+    <strong>Note:</strong>Kindly write us or Contact if you have any issue while getting the information on Rail Easy.
+  </p>
+  </div>
+<div>
+<!-- <a href="/">Go back to home page</a>
+ --> 
+</body>
+{% include 'footer.html' %}
+
+</html>

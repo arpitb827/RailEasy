@@ -1,0 +1,83 @@
+<html>
+ <head>
+  <title>Train Route Information</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+    </head>
+  {% include 'head.html' %}
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<!-- {% for dict_item in rows %}
+   {% for key, value in dict_item.items() %}
+      <h1>Key: {{key}}</h1>
+      <h2>Value: {{value}}</h2> 
+   {% endfor %}
+{% endfor %} -->
+{% for row in  rows%}
+<div style="width:1000px;" class="container">
+<div class="table-responsive" >
+      <table   align="center" class="table table-hover ">
+  <thead>
+    <th>Train Number</th>
+    <th>Train Name</th>
+    <th>Days</th>
+   
+  </thead>
+    <tbody>
+     {% if 'train' in row %}
+      {% for train_data in  [row.train]%}
+      <tr>
+      <td>
+      {{train_data["number"]}}
+      </td>
+      <td>
+      {{train_data["name"]}}
+      </td>
+      <td >
+          {% if 'days' in train_data %}
+            <table border="1px">
+              <thead>
+                <th>
+                  Day
+                </th>
+                <th>
+                  Run On
+                </th>
+              </thead>
+             {% for day_data in  train_data["days"]%}
+                
+                  <tr><td>{{day_data["code"]}}</td><td>{{day_data["runs"]}}</td></tr>
+             
+              {% endfor %}
+            </table>
+          {% endif %}
+         </td>
+      </tr>
+
+
+      {% endfor %}
+    {% endif %}
+  </tbody>
+  </table>
+</div>
+</div>
+{% endfor %}
+
+
+<a href="/">Go back to home page</a>
+ 
+</body>
+{% include 'footer.html' %}
+
+</html>

@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>
+  Fare Enquiry
+</title>
+<link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+ </head>
+  {% include 'head.html' %}
+   <script>
+  $(document).ready(function() {
+    $(".datepicker_my").datepicker({ dateFormat: 'dd-mm-yy'});
+  });
+  </script>
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+<div style="width:300px;" class="col-sm-4">
+    {% for message in form.name.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+     {% for message in form.source_station.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+     {% for message in form.dest_station.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+     {% for message in form.age.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+    
+    <form action="/fair_enquiry" method=post>
+      <fieldset>
+       <legend>Get Fair Enquiry</legend>
+        {{ form.hidden_tag() }}
+       <div class="form-group col-sm-4">
+        {{ form.name.label }}<br/>
+        {{ form.name }}<br/>
+         {{ form.source_station.label }}<br/>
+        {{ form.source_station }}<br/>
+         {{ form.dest_station.label }}<br/>
+        {{ form.dest_station }}<br/>
+         {{ form.age.label }}<br/>
+        {{ form.age }}<br/>
+         {{ form.quota_code.label }}<br/>
+        {{ form.quota_code }}<br/>
+        {{ form.doj.label }}<br/>
+        {{ form.doj(class='datepicker_my') }}<br/>
+        <br/>
+       
+        {{ form.submit }}
+      </div>
+    </fieldset>
+    </form>
+</div>
+<div class="col-sm-8">
+  <center><h3><u>Directions To Find</u></h3></center>
+  <p>
+    <ul  style="font-size: 18px;">
+          <li>Enter train number of 5 digit it should be numerals eg 12953,12950.
+</li>
+      <li>Enter code for source and destination station eg. bct,mtj etc.
+</li>
+      <li>Select Appropiate quota for getting fare enquiry.
+</li>
+      <li>Select Appropiate date on which train is running and you want to spot it.</li>
+      <li>After filling data just hit the Find button and than please be patience now fun start Rail Easy will take give all trains in between selected station.</li>
+      
+      <li>
+        Here i presented all the information in a tabular format which is easy for every user to retrive and note.
+      </li>
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+     <p>
+      <center><h3><u>Causes For Failure</u></h3></center>
+      
+    <ul  style="font-size: 18px;">
+       <li>The data which you are entering  are not proper related with train number.
+</li>
+      <li>The data which you are entering are not proper related with source and destination code.
+</li>
+      <li>The date which you are selecting is not correct date.</li>
+      <li>Server having Techincal Issue , Don't be panic please try after some time.</li>
+      
+     
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+    <strong>Note:</strong>Kindly write us or Contact if you have any issue while getting the information on Rail Easy.
+  </p>
+</div>
+</div>
+</body>
+{% include 'footer.html' %}
+
+</html>

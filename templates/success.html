@@ -1,0 +1,235 @@
+<html>
+ <head>
+  <title>Live Status</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+     </head>
+  {% include 'head.html' %}
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<!-- {% for dict_item in rows %}
+   {% for key, value in dict_item.items() %}
+      <h1>Key: {{key}}</h1>
+      <h2>Value: {{value}}</h2> 
+   {% endfor %}
+{% endfor %} -->
+<div >
+{% for row in  rows%}
+<div class="row">
+  <div class="col-md-8 col-md-offset-5" >
+    <h3>Train Live Status</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+      <div class="table-responsive" >
+      <table  border="0px" align="center" class="table table-hover ">
+        <thead>
+          <th>
+            Train Number
+          </th>
+          <th>
+            Start date
+          </th>
+          <th>
+            Running Status
+          </th>
+        </thead>
+        <tbody>
+
+          <tr class="active">
+           
+            <td>{{row["train_number"]}}</td>
+        
+              <td>{{row["start_date"]}}</td>
+         
+              <td>{{row["position"]}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+  </div>
+  <div class="col-md-10 col-md-offset-1">
+      <div class="table-responsive">
+      <table align="center" border="0px" class="table table-hover ">
+            <caption><h3>Current Station Information</h3></caption>
+             <thead>
+              <th>Current Station</th>
+              <th>Schedule Arrival Date</th>
+              <th>Schedule Arrival</th>
+              <th>Actual Arrival Date</th>
+              <th>Actual Arrival</th>
+              <th>Schedule Departure</th>
+              <th>Actual Depart</th>
+              <th>Distance (Km.)</th>
+              <th>Platform No</th>
+              <th>Day</th>
+              <th>Running Status</th>
+            </thead>
+            <tbody>
+            {% if 'current_station' in row %}
+             {% for curr_st in  [row.current_station]%}
+              <tr class="active">
+                  <td>{% if 'station_' in curr_st %}
+                      {{curr_st["station_"]['code']}}-{{curr_st["station_"]['name']}}
+                  {% endif %}</td>
+             
+                  <td>{{curr_st["scharr_date"]}}</td>              
+                  <td>{{curr_st["scharr"]}}</td>
+                  <td>{{curr_st["actarr_date"]}}</td>
+                  <td>{{curr_st["actarr"]}}</td>
+                  <td>{{curr_st["schdep"]}}</td>
+                  <td>{{curr_st["actdep"]}}</td>
+                  <td>{{curr_st["distance"]}}</td>
+                  <td>{{curr_st["no"]}}</td>
+                  <td>{{curr_st["day"]}}</td>
+                  <td>{{curr_st["status"]}}</td>
+              </tr>
+              {% endfor %}
+          {% endif %}
+            </tbody>
+          </table>
+      </div>
+
+  </div>
+</div>
+<!-- <div class="table-responsive" >
+  <table align="center" border="1px" class="table table-hover ">
+<thead>
+</thead>
+<tbody>
+
+  <tr>
+    <td>Train Number</td>
+    <td>{{row["train_number"]}}</td>
+  </tr>
+  <tr>
+      <td>Start Date</td>
+      <td>{{row["start_date"]}}</td>
+  </tr>
+  <tr>
+      <td>Running Status</td>
+      <td>{{row["position"]}}</td>
+  </tr>
+  
+  <tr>
+  <br/>
+  <br/>
+  <div class="table-responsive">
+  <table align="center" border="1px" class="table table-hover ">
+        <caption>Current Station Information</caption>
+         <thead>
+          <th>Running Status</th>
+          <th>Schedule Departure</th>
+          <th>Distance (Km.)</th>
+          <th>Platform No</th>
+          <th>Current Station</th>
+          <th>Actual Arrival Date</th>
+          <th>Actual Depart</th>
+          <th>Schedule Arrival</th>
+          <th>Schedule Arrival On</th>
+          <th>Actual Arrival</th>
+          <th>Day</th>
+        </thead>
+        <tbody>
+        {% if 'current_station' in row %}
+         {% for curr_st in  [row.current_station]%}
+          <tr>
+              
+              <td>{{curr_st["status"]}}</td>
+         
+              <td>{{curr_st["schdep"]}}</td>
+          
+              <td>{{curr_st["distance"]}}</td>
+          
+              <td>{{curr_st["no"]}}</td>
+          
+              <td>{% if 'station_' in curr_st %}
+                  {{curr_st["station_"]['code']}}-{{curr_st["station_"]['name']}}
+              {% endif %}</td>
+              <td>{{curr_st["actarr_date"]}}</td>
+              <td>{{curr_st["actdep"]}}</td>
+              <td>{{curr_st["scharr"]}}</td>
+              <td>{{curr_st["scharr_date"]}}</td>
+              <td>{{curr_st["actarr"]}}</td>
+              <td>{{curr_st["day"]}}</td>
+          </tr>
+          {% endfor %}
+      {% endif %}
+        </tbody>
+      </table>
+        </tr>
+  </div>
+
+</tbody>
+
+</table>
+</div> -->
+<br/>
+<br/>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1" >
+    
+    <div class="table-responsive">
+  <table align="center" border="0px" class="table table-hover ">
+     <caption><h3>Running Schedule</h3></caption>
+    <thead>
+      <th>Station</th>
+      <th>Schedule Depart</th>
+      <th>Actual Depart</th>
+      <th>Schedule Arrival</th>
+      <th>Actual Arrival Date</th>
+      <th>Actual Arrival</th>
+      <th>Platform No</th>
+      <th>Distance(Km.)</th>
+      <th>Day</th>
+      <th>Status</th>
+
+    </thead>
+    
+    <tbody>
+      {% for route_info in  row.route%}
+      <tr class="active">
+        <td>{% if 'station_' in route_info %}
+        {{route_info["station_"]['code']}}-{{route_info["station_"]['name']}}
+        {% endif %}</td>
+      <td>{{route_info["schdep"]}}</td>
+      <td>{{route_info["actdep"]}}</td>
+      <td>{{route_info["scharr_date"]}}</td>
+      <td>{{route_info["actarr_date"]}}</td>
+      <td>{{route_info["actarr"]}}</td>
+      <td>{{route_info["no"]}}</td>
+      <td>{{route_info["distance"]}}</td>
+      <td>{{route_info["day"]}}</td>
+      <td>{{route_info["status"]}}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+</table>
+</div>
+  </div>
+</div>
+
+{% endfor %}
+</div>
+<a href="/">Go back to home page</a>
+ 
+</body>
+{% include 'footer.html' %}
+
+</html>

@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>
+Station Informaton
+</title>
+<link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+ </head>
+  {% include 'head.html' %}
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div style="width:800px; margin:0 auto;">
+    {% for message in form.name.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+    
+    <form action="/station_name" method=post>
+      <fieldset>
+       <legend>Get Station By Name</legend>
+        {{ form.hidden_tag() }}
+<div class="form-group col-sm-4">
+        {{ form.name.label }}<br/>
+        {{ form.name }}
+        <br/>
+       
+        {{ form.submit }}
+      </div>
+    </fieldset>
+    </form>
+</div>
+ 
+</body>
+{% include 'footer.html' %}
+
+</html>

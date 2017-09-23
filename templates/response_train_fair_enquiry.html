@@ -1,0 +1,109 @@
+<html>
+ <head>
+  <title>Fare Enquiry</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+     </head>
+  {% include 'head.html' %}
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+{% for row in  rows%}
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <center><h3>Fare result</h3></center>
+    
+  <div class="table-responsive">
+    <table border=0px align="center" class="table table-hover">
+    <thead>
+      <tr>
+      <th>Train Number</th>
+      <th>Source</th>
+      <th>Destination</th>
+       <th>Quota</th>
+    </tr>
+      
+     
+    </thead>
+      <tbody>
+      <tr class="active">
+      <td>
+      {{row["train"]["number"]}}
+      </td>
+      <td>
+            {{row["from_station"]["code"]}}-{{row["from_station"]["name"]}}
+
+      </td>
+      <td>
+            {{row["to_station"]["code"]}}-{{row["to_station"]["name"]}}
+
+      </td>
+      <td>
+            {{row["quota"]["code"]}}-{{row["quota"]["name"]}}
+
+      </td>
+      </tr>
+    </tbody>
+    </table>
+</div>
+  
+</div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="table-responsive">
+    <table border=0px align="center" class="table table-hover">
+      <thead>
+        <tr>
+        <th>
+          Class Code
+        </th>
+        <th>
+          Class Name
+        </th>
+        <th>
+          Fare
+        </th>
+      </tr>
+
+      </thead>
+      {% for each in  row.fare%}
+
+      <tbody>
+        <tr class="active">
+          <td>
+            {{each["code"]}}
+          </td>
+          <td>
+            {{each["name"]}}
+          </td>
+          <td>
+            {{each["fare"]}} Rs.
+          </td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+</div>
+{% endfor %}
+
+
+<a href="/">Go back to home page</a>
+ 
+</body>
+{% include 'footer.html' %}
+
+</html>

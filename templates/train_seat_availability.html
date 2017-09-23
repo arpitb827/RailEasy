@@ -1,0 +1,150 @@
+<html>
+ <head>
+  <title>Seat  Availability</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="/static/img/Indian_Railway.png" >
+     </head>
+  {% include 'head.html' %}
+  <script>
+  $(document).ready(function() {
+    $(".datepicker_live").datepicker({ dateFormat: 'dd-mm-yy'});
+  });
+  </script>
+       <!--  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/jquery.datetimepicker.min.css') }}">
+
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.datetimepicker.full.min.js') }}" ></script> -->
+ <!-- <script type="text/javascript">
+   $(function () {
+      var dataSrc = ["australia", "austria", "antartica", "argentina", "algeria"];
+   
+      $(".calling_list").autocomplete({
+          source:dataSrc
+      });
+  });
+ </script> -->
+ <!-- <style type="text/css">
+    .container {
+        width: 500px;
+        clear: both;
+    }
+    .container input {
+        width: 100%;
+        clear: both;
+    }
+
+    </style> -->
+
+  <body>
+    {% include 'social.html' %}
+
+<!-- <h2 style="text-align: center;">Get Train Live Status</h2> -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+<div  class="col-sm-4">
+<!-- <div class="form-group" style="float:middle;">
+ -->    {% for message in form.name.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+     {% for message in form.source.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+     {% for message in form.destination.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+     {% for message in form.doj.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+     {% for message in form.class_code.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+     {% for message in form.quota_code.errors %}
+    <div>{{ message }}</div>
+    {% endfor %}
+
+   {% block content %}
+    <form action="/train_seat_availability" method=post class="form-horizontal">
+      <fieldset>
+       <legend>Check Seat Availability </legend>
+        {{ form.hidden_tag() }}
+<div class="form-group col-sm-4">
+        {{ form.name.label }}
+        <br/>
+        {{ form.name}}
+        <br/>
+        {{ form.source.label }}
+        <br/>
+        {{ form.source}}
+        <br/> {{ form.destination.label }}<br/>
+        {{ form.destination}}
+        <br/> {{ form.doj.label }}
+        <br/>
+        {{ form.doj(class='datepicker_live')}}
+        <br/> {{ form.class_code.label }}
+        <br/>
+        {{ form.class_code}}
+        <br/>
+         {{ form.quota_code.label }}
+        <br/>
+        {{ form.quota_code}}<br/>
+        {{ form.submit }}
+      </div>
+    </fieldset>
+    </form>
+    {% endblock content %}
+</div>
+<div class="col-sm-8">
+  <center><h3><u>Directions To Find</u></h3></center>
+  <p>
+    <ul  style="font-size: 18px;">
+      <li>Enter train number of 5 digit it should be numerals eg 12953,12950.
+</li>
+      <li>Enter valid source and destination station code eg bct,mtj.<br>For find station code <a href="/station_code" >Click here</a></li>
+      <li>
+        Enter the valid date on which train is running in (dd-mm-yy) format.
+
+      </li>
+      <li>
+        Choose a vaild class to know the seat is available or not in the selected train.
+      </li>
+      <li>
+        Choose appropiate quota from the given drop down list by default it picks General Quota.
+      </li>
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+     <p>
+      <center><h3><u>Causes For Failure</u></h3></center>
+      
+    <ul  style="font-size: 18px;">
+      <li>The data which you are entering  are not proper related with train number,station code information.
+      </li>
+      <li>Server having Techincal Issue , Don't be panic please try after some time.</li>
+      
+     
+    </ul>
+
+  </p>
+  
+  <br/>
+  <p>
+    <strong>Note:</strong>Kindly write us or Contact if you have any issue while getting the information on Rail Easy.
+  </p>
+</div>
+</div>
+<!-- <a href="/">Go back to home page</a>
+ --> 
+</body>
+{% include 'footer.html' %}
+
+</html>
