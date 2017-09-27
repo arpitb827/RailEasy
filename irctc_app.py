@@ -11,7 +11,7 @@ import urllib2
 import json
 
 from base64 import b64encode
-
+import operator
 
 
 app = Flask(__name__, template_folder='templates')
@@ -69,6 +69,12 @@ class Comment(db.Model):
 
 	id = db.Column('id', db.Integer, db.Sequence('comment_id_seq',start=1), primary_key=True,)
 	comment = db.Column(db.Text)
+	create_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+@app.route("/dashboard")
+def show_dashboard():
+
+	return render_template("dashboard.html")
 
 @app.route("/post_comment",methods=['GET', 'POST'])
 def post_comments():
@@ -76,12 +82,15 @@ def post_comments():
 	form = Blog_Comment()
 	if request.method=='POST':
 		print "request.form========",request.form,request.form['comment']
-		
-		post =Comment(comment=request.form['comment'])
-		print "post=============",post
-		db.session.add(post)
-		db.session.commit()
-		return redirect(url_for('response_blog'))
+		if request.form['comment']:
+			post =Comment(comment=request.form['comment'])
+			print "post=============",post
+			db.session.add(post)
+			db.session.commit()
+			return redirect(url_for('response_blog'))
+		else:
+			flash("Please enter some text to post message")
+			return redirect(url_for('response_blog'))
 	return render_template("easy_blog.html",form=form)
 
 
@@ -142,15 +151,20 @@ def response_blog():
 	# print 'response==========',posts
 	new_data = [(each.title,each.created_date,each.content,b64encode(each.image_data)if each.image_data else '') for each in posts]
 	# print "new_data====",new_data
-	import operator
 
 	#sort by date
 	new_data.sort(key=operator.itemgetter(1),reverse=True)
 	
 	# if posts.image_data:
 	# image = b64encode(posts.image_data)
+	comment_data =Comment.query.all()
 
-	return render_template("response_blog.html",posts=new_data)
+	new_c_data = [(each.comment,each.create_date) for each in comment_data]
+	# print "new_data====",new_data
+
+	#sort by date
+	new_c_data.sort(key=operator.itemgetter(1),reverse=True)
+	return render_template("response_blog.html",posts=new_data,form=Blog_Comment(),comments=new_c_data)
 
 @app.route("/response_contact")
 def response_contact():

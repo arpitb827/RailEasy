@@ -122,4 +122,4 @@ class TrainFairEnquiry(Form):
 class Blog_Comment(Form):
 
 	comment = TextAreaField("Comment",[validators.Required("Please enter views .")])
-	submit = SubmitField("Post")
+	submit = SubmitField("Post Comment")
