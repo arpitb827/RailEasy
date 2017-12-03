@@ -98,43 +98,42 @@ def post_comments():
 def index():
 	form ={}
 	data ={}
-	data_to_show=[]
-	# print "datetime.datetime.utcnow",datetime.datetime.utcnow,(datetime.datetime.now()-datetime.timedelta(days=1)).strftime("%Y-%m-%d")
-	current_news = News.query.filter(News.create_date <= (datetime.datetime.now()-datetime.timedelta(days=1)).strftime("%Y-%m-%d")).all()
-	# print "current_news====",current_news
-	if current_news:
-		for each in current_news:
-			data_to_show.append({'description':each.description,'title':each.title,
-					'url':each.news_url,'publishedAt':each.publish_date,'urlToImage':each.image_url})
-		form={'articles':data_to_show}
+	# data_to_show=[]
+	# # print "datetime.datetime.utcnow",datetime.datetime.utcnow,(datetime.datetime.now()-datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+	# current_news = News.query.filter(News.create_date <= (datetime.datetime.now()-datetime.timedelta(days=1)).strftime("%Y-%m-%d")).all()
+	# # print "current_news====",current_news
+	# if current_news:
+	# 	for each in current_news:
+	# 		data_to_show.append({'description':each.description,'title':each.title,
+	# 				'url':each.news_url,'publishedAt':each.publish_date,'urlToImage':each.image_url})
+	# 	form={'articles':data_to_show}
 	# else:
 	try:
 		data = result.get_request_from_news(news_api_url)
 	except Exception as e:
 		pass
 	print "dataaaaaa",data
-	print "data_to_show=====",data_to_show
 	if 'status' in data and data.get('status')=='ok':
 		form =data
 
 		# creating all news into the databases
-		news_to_add = False
-		if 'articles' in form and form.get('articles'):
-			# if data_to_show:
-			# 	data.get('articles',[])+data_to_show
-			# print "form.get('articles')=====",data.get('articles'),type(data.get('articles'))
-			for each in form.get('articles'):
-				print "each=====",each
-				existing_news = News.query.filter(News.create_date <= datetime.datetime.now()).filter_by(title=each.get('title')).all()
-				print "Existing news=======",existing_news
-				if not existing_news:
-					news_to_add = News(source=data.get('source'),description=each.get('description'), 
-								title=each.get('title'),news_url=each.get('url'),image_url = each.get('urlToImage'),
-								publish_date = str(each.get('publishedAt')).replace('T',' ').replace('Z', ' '))
-					db.session.add(news_to_add)
-					db.session.commit()
-				else:
-					pass
+		# news_to_add = False
+		# if 'articles' in form and form.get('articles'):
+		# 	# if data_to_show:
+		# 	# 	data.get('articles',[])+data_to_show
+		# 	# print "form.get('articles')=====",data.get('articles'),type(data.get('articles'))
+		# 	for each in form.get('articles'):
+		# 		print "each=====",each
+		# 		existing_news = News.query.filter(News.create_date <= datetime.datetime.now()).filter_by(title=each.get('title')).all()
+		# 		print "Existing news=======",existing_news
+		# 		if not existing_news:
+		# 			news_to_add = News(source=data.get('source'),description=each.get('description'), 
+		# 						title=each.get('title'),news_url=each.get('url'),image_url = each.get('urlToImage'),
+		# 						publish_date = str(each.get('publishedAt')).replace('T',' ').replace('Z', ' '))
+		# 			db.session.add(news_to_add)
+		# 			db.session.commit()
+		# 		else:
+		# 			pass
 	# else:
 	# 	form={'articles':data_to_show}
 
