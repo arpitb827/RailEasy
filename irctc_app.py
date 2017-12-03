@@ -22,7 +22,7 @@ app.secret_key = 'hey1234##'
 #new api key Kiran
 result = RAIL_API("http://api.railwayapi.com/v2/",'7915fh5abf')
 
-#app.config['SQLALCHEMY_DATABASE_URI']='mysql://root:honey@localhost/irctc'
+# app.config['SQLALCHEMY_DATABASE_URI']='mysql://root:honey@localhost/irctc'
 app.config['SQLALCHEMY_DATABASE_URI']='mysql://b29e7c6015fc57:49812c5e@us-cdbr-iron-east-03.cleardb.net/heroku_6341d6eb54cb201'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
 app.config['WHOOSH_BASE']='whoosh'
@@ -97,36 +97,48 @@ def post_comments():
 @app.route("/")
 def index():
 	form ={}
+	data ={}
+	data_to_show=[]
 	# print "datetime.datetime.utcnow",datetime.datetime.utcnow,(datetime.datetime.now()-datetime.timedelta(days=1)).strftime("%Y-%m-%d")
-	# current_news = News.query.filter(News.create_date == (datetime.datetime.now()-datetime.timedelta(days=1)).strftime("%Y-%m-%d")).all()
+	current_news = News.query.filter(News.create_date <= (datetime.datetime.now()-datetime.timedelta(days=1)).strftime("%Y-%m-%d")).all()
 	# print "current_news====",current_news
-	# if current_news:
-	# 	data_to_show=[]
-	# 	for each in current_news:
-	# 		data_to_show.append({'description':each.description,'title':each.title,
-	# 				'url':each.news_url,'publishedAt':each.publish.date,'urlToImage':each.image_url})
-	# 	form={'articles':data_to_show}
+	if current_news:
+		for each in current_news:
+			data_to_show.append({'description':each.description,'title':each.title,
+					'url':each.news_url,'publishedAt':each.publish_date,'urlToImage':each.image_url})
+		form={'articles':data_to_show}
 	# else:
-	data = result.get_request_from_news(news_api_url)
+	try:
+		data = result.get_request_from_news(news_api_url)
+	except Exception as e:
+		pass
+	print "dataaaaaa",data
+	print "data_to_show=====",data_to_show
 	if 'status' in data and data.get('status')=='ok':
 		form =data
-		#creating all news into the databases
-		# news_to_add = False
-		# if 'articles' in form and form.get('articles'):
-		# 	for each in form.get('articles'):
-		# 		print "each=====",each
-		# 		existing_news = News.query.filter(News.create_date <= datetime.datetime.utcnow).filter_by(title=each.get('title')).all()
-		# 		print "Existing news=======",existing_news
-		# 		if not existing_news:
-		# 			news_to_add = News(source=data.get('source'),description=each.get('description'), 
-		# 						title=each.get('title'),news_url=each.get('url'),image_url = each.get('urlToImage'),
-		# 						publish_date = str(each.get('publishedAt')).replace('T',' ').replace('Z', ' '))
-		# 			db.session.add(news_to_add)
-		# 			db.session.commit()
-		# 		else:
-		# 			continue
 
-	print "data=======",data
+		# creating all news into the databases
+		news_to_add = False
+		if 'articles' in form and form.get('articles'):
+			# if data_to_show:
+			# 	data.get('articles',[])+data_to_show
+			# print "form.get('articles')=====",data.get('articles'),type(data.get('articles'))
+			for each in form.get('articles'):
+				print "each=====",each
+				existing_news = News.query.filter(News.create_date <= datetime.datetime.now()).filter_by(title=each.get('title')).all()
+				print "Existing news=======",existing_news
+				if not existing_news:
+					news_to_add = News(source=data.get('source'),description=each.get('description'), 
+								title=each.get('title'),news_url=each.get('url'),image_url = each.get('urlToImage'),
+								publish_date = str(each.get('publishedAt')).replace('T',' ').replace('Z', ' '))
+					db.session.add(news_to_add)
+					db.session.commit()
+				else:
+					pass
+	# else:
+	# 	form={'articles':data_to_show}
+
+	print "data====111===",data
 	return render_template("index.html",rows=form)
 
 
