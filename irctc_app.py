@@ -71,6 +71,8 @@ class Comment(db.Model):
 	comment = db.Column(db.Text)
 	create_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+
+
 @app.route("/dashboard")
 def show_dashboard():
 
