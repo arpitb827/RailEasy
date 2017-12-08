@@ -12,6 +12,12 @@ import json
 
 from base64 import b64encode
 import operator
+import matplotlib as mpl
+mpl.use('agg')
+import matplotlib.pyplot as plt
+from sqlalchemy import create_engine
+from io import BytesIO
+import base64
 
 
 app = Flask(__name__, template_folder='templates')
@@ -75,8 +81,49 @@ class Comment(db.Model):
 
 @app.route("/dashboard")
 def show_dashboard():
+	# engine = create_engine('mysql+mysqldb://root:honey@localhost/irctc')
+	engine = create_engine('mysql+mysqldb://b29e7c6015fc57:49812c5e@us-cdbr-iron-east-03.cleardb.net/heroku_6341d6eb54cb201')
 
-	return render_template("dashboard.html")
+	# print engine
+	cnx = engine.connect()
+	x = cnx.execute("select name,count(id) from contact group by name")
+	cnx.close()
+
+	l1=[]
+	l2=[]
+	l3=[]
+	for each in x:
+	#     print each
+	#     if each[1] not in l1:
+	        l1.append(len(each[0]))
+	        l3.append(each[0])
+	#     if each[3] not in l2:
+	        l2.append(int(each[1]))
+	print l1,l2,l3
+
+
+	# plt.plot(l1, l2,'o-')
+	# plt.title('Example')
+	# plt.xlabel('hey')
+	# plt.ylabel('jey')
+	# plt.show()
+
+	explode = (0, 0.1, 0, 0,0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+
+	fig1, ax1 = plt.subplots()
+	ax1.pie(l2, explode=explode, labels=l3, autopct='%1.1f%%',
+	        shadow=True, startangle=90)
+	ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+	fig1.savefig("contact_summ.png")
+	figfile = BytesIO()
+	fig1.savefig(figfile, format='png')
+	figfile.seek(0)
+	figdata_png = base64.b64encode(figfile.getvalue())
+	result = figdata_png
+
+	# plt.show()
+
+	return render_template("dashboard.html",contact_result=result)
 
 @app.route("/post_comment",methods=['GET', 'POST'])
 def post_comments():
