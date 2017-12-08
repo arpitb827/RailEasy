@@ -107,11 +107,16 @@ def show_dashboard():
 	# plt.xlabel('hey')
 	# plt.ylabel('jey')
 	# plt.show()
-
-	explode = (0, 0.1, 0, 0,0)  # only "explode" the 2nd slice (i.e. 'Hogs')
-
+	explode=[]
+	if len(l3):
+		for each in range(0,len(l3)):
+			if each==1:
+				explode.append(0.1)
+			else:
+				explode.append(0)
+	# explode = (0, 0.1, 0, 0,0)  # only "explode" the 2nd slice (i.e. 'Hogs')
 	fig1, ax1 = plt.subplots()
-	ax1.pie(l2, explode=explode, labels=l3, autopct='%1.1f%%',
+	ax1.pie(l2, explode=tuple(explode), labels=l3, autopct='%1.1f%%',
 	        shadow=True, startangle=90)
 	ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 	fig1.savefig("contact_summ.png")
