@@ -26,7 +26,7 @@ app.secret_key = 'hey1234##'
 # result = RAIL_API("http://api.railwayapi.com/v2/",'mia22f6h')
 # result = RAIL_API("http://api.railwayapi.com/",'mia22f6h')
 #new api key Kiran
-result = RAIL_API("http://api.railwayapi.com/v2/",'7915fh5abf')
+result = RAIL_API("http://api.railwayapi.com/v2/",'lwqre89h7z')
 
 # app.config['SQLALCHEMY_DATABASE_URI']='mysql://root:honey@localhost/irctc'
 app.config['SQLALCHEMY_DATABASE_URI']='mysql://b29e7c6015fc57:49812c5e@us-cdbr-iron-east-03.cleardb.net/heroku_6341d6eb54cb201'
