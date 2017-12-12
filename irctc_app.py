@@ -78,9 +78,8 @@ class Comment(db.Model):
 	create_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
 
-
-@app.route("/dashboard")
-def show_dashboard():
+@app.route("/view_contact_summary")
+def display_contact_summary():
 	# engine = create_engine('mysql+mysqldb://root:honey@localhost/irctc')
 	engine = create_engine('mysql+mysqldb://b29e7c6015fc57:49812c5e@us-cdbr-iron-east-03.cleardb.net/heroku_6341d6eb54cb201')
 
@@ -119,6 +118,13 @@ def show_dashboard():
 	ax1.pie(l2, explode=tuple(explode), labels=l3, autopct='%1.1f%%',
 	        shadow=True, startangle=90)
 	ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+	# DPI = fig1.get_dpi()
+	# print "DPI:", DPI
+	# DefaultSize = fig1.get_size_inches()
+	# print "Default size in Inches", DefaultSize
+	# fig1.set_size_inches( (DefaultSize[0]*5, DefaultSize[1]*5) )
+	# Size = fig1.get_size_inches()
+	# print "Size in Inches", Size
 	fig1.savefig("contact_summ.png")
 	figfile = BytesIO()
 	fig1.savefig(figfile, format='png')
@@ -126,9 +132,15 @@ def show_dashboard():
 	figdata_png = base64.b64encode(figfile.getvalue())
 	result = figdata_png
 
-	# plt.show()
 
-	return render_template("dashboard.html",contact_result=result)
+	return render_template("fig_contact_smmary.html", result=result)
+
+@app.route("/dashboard")
+def show_dashboard():
+	
+	
+
+	return render_template("dashboard.html")
 
 @app.route("/post_comment",methods=['GET', 'POST'])
 def post_comments():
