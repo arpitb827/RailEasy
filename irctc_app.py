@@ -147,10 +147,8 @@ def post_comments():
 	print "calling post comment"
 	form = Blog_Comment()
 	if request.method=='POST':
-		print "request.form========",request.form,request.form['comment']
 		if request.form['comment']:
 			post =Comment(comment=request.form['comment'])
-			print "post=============",post
 			db.session.add(post)
 			db.session.commit()
 			return redirect(url_for('response_blog'))
@@ -203,7 +201,6 @@ def index():
 	# else:
 	# 	form={'articles':data_to_show}
 
-	print "data====111===",data
 	return render_template("index.html",rows=form)
 
 
@@ -257,11 +254,8 @@ def search():
 @app.route("/add",methods=['GET', 'POST'])
 def add_easy_blog():
 	if request.method=='POST':
-		print "request.form========",request.form,request.form['content']
 		file = request.files['inputfile']
-		print "file====",file
 		post =Blog(title=request.form['title'],content=request.form['content'], image_name=file.filename, image_data=file.read())
-		print "post=============",post
 		db.session.add(post)
 		db.session.commit()
 		return redirect(url_for('response_blog'))
@@ -273,13 +267,11 @@ def add_easy_blog():
 def contact():
    form = ContactForm()
    if request.method == 'POST':
-   	print "form==validate==",form.validate()
 	if form.validate() == False:
 	   flash('All fields are required.')
 	   return render_template('contact_form.html', form=form)
 	else:
 		post =Contact(name=request.form['name'],email=request.form['email'],phone_number=request.form['phone_number'],message=request.form['message'])
-		print "post=============",post
 		db.session.add(post)
 		db.session.commit()
 		name =request.form['name']
@@ -302,13 +294,10 @@ def train_live_status():
 	   flash('All fields are required.')
 	   return render_template('train_live_status.html', form=form)
 	else:
-	   print "data=======",request.form['doj']
 	   doj = request.form['doj']
 	   train_name_number = request.form['name']
 	   response={}
-	   print "doj========train_name_number==",train_name_number
 	   response = result.get_train_live_status(train_name_number,doj)#doj.replace("-",""))
-	   print "response========",response.keys(),type(response)	   		
 	   return render_template('success.html',rows =[response])
    elif request.method == 'GET':
        return render_template('train_live_status.html', form=form)
@@ -323,9 +312,7 @@ def train_route_information():
 		else:
 		   train_name_number = request.form['name']
 		   response={}
-		   print "train_name_number==",train_name_number
 		   response = result.get_train_route_information(train_name_number)
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_train_route.html',rows =[response])
     elif request.method == 'GET':
        return render_template('train_route_information.html', form=form)
@@ -340,9 +327,7 @@ def train_details():
 		else:
 		   train_name_number = request.form['name']
 		   response={}
-		   print "train_name_number==",train_name_number
 		   response = result.get_train_name_number(train_name_number)
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_train_details.html',rows =[response])
     elif request.method == 'GET':
        return render_template('train_details.html', form=form)
@@ -357,12 +342,10 @@ def train_cancelled():
 		else:
 		   running_date = request.form['doj']
 		   response={}
-		   print "train_name_number==",running_date,type(running_date)
 		   # running_date =datetime.datetime.strptime(str(running_date), '%Y-%m-%d').strftime('%d-%m-%Y')
 		   # running_date =datetime.datetime.strptime(str(running_date))
 
 		   response = result.get_cancelled_trains(running_date)
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_train_cancelled.html',rows =[response])
     elif request.method == 'GET':
        return render_template('train_cancelled.html', form=form)
@@ -377,10 +360,8 @@ def train_reschedule():
 		else:
 		   running_date = request.form['doj']
 		   response={}
-		   print "train_name_number==",running_date,type(running_date)
 		   # running_date =datetime.datetime.strptime(str(running_date), '%Y-%m-%d').strftime('%d-%m-%Y')
 		   response = result.get_rescheduled_trains(running_date)
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_train_reschedule.html',rows =[response])
     elif request.method == 'GET':
        return render_template('train_reschedule.html', form=form)
@@ -396,7 +377,6 @@ def train_pnr_status():
 		   pnr = request.form['name']
 		   response={}
 		   response = result.get_train_pnr_status(pnr)
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_pnr_status.html',rows =[response])
     elif request.method == 'GET':
        return render_template('train_pnr.html', form=form)
@@ -412,7 +392,6 @@ def train_station_name():
 		   st_name = request.form['name']
 		   response={}
 		   response = result.get_train_name_to_code(st_name)
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_train_station_name.html',rows =[response])
     elif request.method == 'GET':
        return render_template('train_station_name.html', form=form)
@@ -428,7 +407,6 @@ def train_station_code():
 		   st_name = request.form['name']
 		   response={}
 		   response = result.get_train_code_to_name(st_name)
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_train_station_code.html',rows =[response])
     elif request.method == 'GET':
        return render_template('train_station_code.html', form=form)
@@ -444,13 +422,11 @@ def train_between_station():
 		   s_name = request.form['s_code']
 		   d_name = request.form['d_code']
 		   running_date = request.form['doj']
-		   print "running_date======",running_date,type(running_date)
 		   # modify_running_date =datetime.datetime.strptime(str(running_date), '%Y-%m-%d').strftime('%d-%m-%Y')
 		   response={}
 		   # response = result.get_train_between_stations(s_name,d_name,modify_running_date[:5])
 		   response = result.get_train_between_stations(s_name,d_name,running_date)
 
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_train_btw_station.html',rows =[response])
     elif request.method == 'GET':
        return render_template('train_btw_station.html', form=form)
@@ -471,7 +447,6 @@ def suggest_train():
 		   train_name = request.form['name']
 		   response={}
 		   response = result.get_suggest_train(train_name)
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_train_suggest.html',rows =[response])
     elif request.method == 'GET':
        return render_template('train_suggest.html', form=form)
@@ -487,7 +462,6 @@ def suggest_station():
 		   station_name = request.form['name']
 		   response={}
 		   response = result.get_train_suggest_station(station_name)
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_station_suggest.html',rows =[response])
     elif request.method == 'GET':
        return render_template('station_suggest.html', form=form)
@@ -508,7 +482,6 @@ def get_seat_availability():
 		   quota = request.form['quota_code']
 		   response={}
 		   response = result.get_train_seat_availabity(train_name,source,destination,doj,class_code,quota)
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_seat_availability.html',rows =[response])
     elif request.method == 'GET':
        return render_template('train_seat_availability.html', form=form)
@@ -529,7 +502,6 @@ def get_train_fair_enquiry():
 		   doj = request.form['doj']
 		   response={}
 		   response = result.get_train_fair_enquiry(train_no,source,destination,age,quota_code,doj)
-		   print "response========",response.keys(),type(response)	   		
 		   return render_template('response_train_fair_enquiry.html',rows =[response])
     elif request.method == 'GET':
        return render_template('train_fair_enquiry.html', form=form)
