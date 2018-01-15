@@ -18,30 +18,10 @@
 <br/>
 <br/>
 <br/>
-<!-- {% for dict_item in rows %}
-   {% for key, value in dict_item.items() %}
-      <h1>Key: {{key}}</h1>
-      <h2>Value: {{value}}</h2> 
-   {% endfor %}
-{% endfor %} -->
 {% for row in  rows%}
 
 <div style="width:1000px;" class="container">
-  <table border=1px align="center">
-  <thead>
-    <th>Last Update Date/Time</th>
-    
-   
-  </thead>
-    <tbody>
-    <tr class="active">
-    <td>
-    {% if 'last_updated' in row %}
-    {{row["last_updated"]["date"]}} {{row["last_updated"]["time"]}}
-    {% endif %}</td>
-    </tr>
-  </tbody>
-  </table>
+
   <br/>
   <br/>
   <div class="table-responsive">
@@ -49,7 +29,7 @@
       <thead>
       <th>Train Number</th>
       <th>Train Name</th>
-      <th>Start Time</th>
+      <th>Start Date</th>
       <th>Source</th>
       <th>Destination</th>
       <th>Train Type</th>
@@ -59,12 +39,12 @@
         {% for train_data in  row.trains%}
 
         <tr class="active">
-          <td>{{train_data["train"]["number"]}}</td>
-          <td>{{train_data["train"]["name"]}}</td>
-          <td>{{train_data["train"]["start_time"]}}</td>
+          <td>{{train_data["number"]}}</td>
+          <td>{{train_data["name"]}}</td>
+          <td>{{train_data["start_time"]}}</td>
           <td>{{train_data["source"]["code"]}}-{{train_data["source"]["name"]}}</td>
           <td>{{train_data["dest"]["code"]}}-{{train_data["dest"]["name"]}}</td>
-          <td>{{train_data["train"]["type"]}}</td>
+          <td>{{train_data["type"]}}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -75,7 +55,7 @@
 {% endfor %}
 
 
-<a href="/">Go back to home page</a>
+<!-- <a href="/">Go back to home page</a> -->
  
 </body>
 {% include 'footer.html' %}

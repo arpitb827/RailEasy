@@ -18,12 +18,7 @@
 <br/>
 <br/>
 <br/>
-<!-- {% for dict_item in rows %}
-   {% for key, value in dict_item.items() %}
-      <h1>Key: {{key}}</h1>
-      <h2>Value: {{value}}</h2> 
-   {% endfor %}
-{% endfor %} -->
+
 {% for row in  rows%}
 
 <div style="width:1000px;" class="container">
@@ -47,8 +42,8 @@
                     <td>{{train_data["number"]}}</td>
           <td>{{train_data["name"]}}</td>
 
-          <td>{{train_data["from"]["code"]}}-{{train_data["from"]["name"]}}</td>
-                  <td>{{train_data["to"]["code"]}}-{{train_data["to"]["name"]}}</td>
+          <td>{{train_data["from_station"]["code"]}}-{{train_data["from_station"]["name"]}}</td>
+          <td>{{train_data["to_station"]["code"]}}-{{train_data["to_station"]["name"]}}</td>
           <td>{{train_data["rescheduled_date"]}}</td>
 
           <td>{{train_data["rescheduled_time"]}}</td>
@@ -63,8 +58,8 @@
 {% endfor %}
 
 
-<a href="/">Go back to home page</a>
- 
+<!-- <a href="/">Go back to home page</a>
+ --> 
 </body>
 {% include 'footer.html' %}
 
