@@ -62,13 +62,13 @@
 
       </thead>
       <tbody>
-        {% for train_data in  row.train%}
+        {% for train_data in  row.trains%}
 
         <tr class="active">
         <td>{{train_data["number"]}}</td>
           <td>{{train_data["name"]}}</td>
-           <td>{{train_data["from"]["code"]}}-{{train_data["from"]["name"]}}</td>
-           <td>{{train_data["to"]["code"]}}-{{train_data["to"]["name"]}}</td>
+           <td>{{train_data["from_station"]["code"]}}-{{train_data["from_station"]["name"]}}</td>
+           <td>{{train_data["to_station"]["code"]}}-{{train_data["to_station"]["name"]}}</td>
            <td>{{train_data["src_departure_time"]}}</td>
             <td>{{train_data["dest_arrival_time"]}}</td>
          

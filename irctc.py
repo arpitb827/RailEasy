@@ -136,7 +136,9 @@ class RAIL_API():
 		req = urllib2.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
 		try:
 			response = urllib2.urlopen(req)
+			# print("response==========",response)
 			the_page = json.load(response)
+			# print ("the page=====",the_page)
 			# d = dict(xmltodict.parse(str(the_page))['response'])
 			return the_page
 		except urllib2.HTTPError, e:

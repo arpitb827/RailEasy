@@ -26,7 +26,7 @@ app.secret_key = 'hey1234##'
 # result = RAIL_API("http://api.railwayapi.com/v2/",'mia22f6h')
 # result = RAIL_API("http://api.railwayapi.com/",'mia22f6h')
 #new api key Kiran
-result = RAIL_API("http://api.railwayapi.com/v2/",'lwqre89h7z')
+result = RAIL_API("http://api.railwayapi.com/v2/",'bxkpbko307')
 
 # app.config['SQLALCHEMY_DATABASE_URI']='mysql://root:honey@localhost/irctc'
 app.config['SQLALCHEMY_DATABASE_URI']='mysql://b29e7c6015fc57:49812c5e@us-cdbr-iron-east-03.cleardb.net/heroku_6341d6eb54cb201'
@@ -176,7 +176,7 @@ def index():
 		data = result.get_request_from_news(news_api_url)
 	except Exception as e:
 		pass
-	print "dataaaaaa",data
+	# print "dataaaaaa",data
 	if 'status' in data and data.get('status')=='ok':
 		form =data
 

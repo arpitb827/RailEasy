@@ -36,18 +36,16 @@
       <thead>
       <th>Station Code</th>
       <th>Station Name</th>
-      <th>State</th>
      
       <th>Lat</th>
-      <th>Long</th>
+      <th>Lang</th>
       </thead>
       <tbody>
         {% for train_data in  row.stations%}
 
         <tr>
           <td>{{train_data["code"]}}</td>
-          <td>{{train_data["fullname"]}}</td>
-          <td>{{train_data["state"]}}</td>
+          <td>{{train_data["name"]}}</td>
           <td>{{train_data["lat"]}}</td>
           <td>{{train_data["lng"]}}</td>
         </tr>

@@ -143,7 +143,7 @@
       {% for route_info in  row.route%}
       <tr class="active">
         <td>
-        {{route_info["code"]}}-{{route_info["fullname"]}}
+        {{route_info["station"]["code"]}}-{{route_info["station"]["name"]}}
         </td>
       <td>{{route_info["schdep"]}}</td>
             <td>{{route_info["scharr"]}}</td>
@@ -156,8 +156,8 @@
       <td>{{route_info["distance"]}}</td>
       <td>{{route_info["day"]}}</td>
 
-      <td>{{route_info["lng"]}}</td>
-      <td>{{route_info["lat"]}}</td>
+      <td>{{route_info["station"]["lng"]}}</td>
+      <td>{{route_info["station"]["lat"]}}</td>
       <td><a href="https://www.google.co.in/maps" target="_blank">Link</a></td>
       
       
